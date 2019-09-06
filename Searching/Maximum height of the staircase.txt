@@ -1,0 +1,21 @@
+Input 1:
+    A = 10
+Output 1:
+    4
+
+Input 2:
+    A = 20
+Output 2:
+    5
+
+int Solution::solve(int A) {
+    int count=0,sum=0,c=1;
+    while(sum<A){
+        sum+=c;
+        count++;
+        c++;
+    }
+    if(sum>A)
+        count--;
+    return count;
+}

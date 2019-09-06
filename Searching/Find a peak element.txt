@@ -1,0 +1,35 @@
+Input 1:
+    A = [1, 2, 3, 4, 5]
+Output 1:
+    5
+
+Input 2:
+    A = [5, 17, 100, 11]
+Output 2:
+    100
+
+/**
+ * @input A : Integer array
+ * @input n1 : Integer array's ( A ) length
+ * 
+ * @Output Integer
+ */
+int solve(int* A, int n1) {
+    int i;
+    int left=A[0];
+    int right=A[n1-1];
+    int low=0,mid;
+    int high=n1-1;
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        if((A[mid]==left)||(A[mid]==right))
+            return A[mid];
+        else if((A[mid]>=A[mid+1])&&(A[mid]>=A[mid-1]))
+            return A[mid];
+        else if((A[mid]>A[mid-1])&&(A[mid]<A[mid+1]))
+            low=mid+1;
+        else
+            high=mid-1;
+    }
+}

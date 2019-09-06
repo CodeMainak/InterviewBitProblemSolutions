@@ -1,0 +1,43 @@
+Input : 
+          1
+         / \
+        2   3
+
+Return : True or 1 
+
+Input 2 : 
+         3
+        /
+       2
+      /
+     1
+
+Return : False or 0 
+         Because for the root node, left subtree has depth 2 and right subtree has depth 0. 
+         Difference = 2 > 1. 
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+int findHeight(TreeNode* root){
+    if(root==NULL)
+        return -1;
+    int l=findHeight(root->left);
+    int r=findHeight(root->right);
+    return max(l,r)+1;
+}
+int Solution::isBalanced(TreeNode* A) {
+    if(!A)
+        return 1;
+    int left=findHeight(A->left);
+    int right=findHeight(A->right);
+    if(abs(left-right)<=1 && isBalanced(A->left) && isBalanced(A->right))
+        return 1;
+    return 0;
+}

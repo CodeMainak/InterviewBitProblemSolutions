@@ -1,0 +1,47 @@
+Input 1:
+            1
+          /   \
+         2    3
+        / \  / \
+       4   5 6  7
+      /
+     8 
+Output 1:
+    [1, 2, 4, 8]
+
+Input 2:
+            1
+           /  \
+          2    3
+           \
+            4
+             \
+              5
+Output 2:
+    [1, 2, 4, 5]
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+void leftView(TreeNode* root,vector<int> &v,int* val,int level){
+    if(root==NULL)
+        return;
+    if(*val<level){
+        v.push_back(root->val);
+        *val=level;   
+    }
+    leftView(root->left,v,val,level+1);
+    leftView(root->right,v,val,level+1);
+}
+vector<int> Solution::solve(TreeNode* A) {
+    vector<int> v;
+    int val=0;
+    leftView(A,v,&val,1);
+    return v;
+}

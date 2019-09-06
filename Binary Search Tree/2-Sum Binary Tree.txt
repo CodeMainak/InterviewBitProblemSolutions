@@ -1,0 +1,47 @@
+Input 1: 
+
+T :       10
+         / \
+        9   20
+
+K = 19
+
+Return: 1
+
+Input 2: 
+
+T:        10
+         / \
+        9   20
+
+K = 40
+
+Return: 0
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ int findsum(TreeNode* A,int B,unordered_set<int> &set){
+    if(A==NULL)
+        return 0;
+    if(findsum(A->left,B,set))
+        return 1;
+    if(set.find(B-A->val)!=set.end())
+        return 1;
+    else
+        set.insert(A->val);
+    if(findsum(A->right,B,set))
+        return 1;
+        
+    
+ }
+int Solution::t2Sum(TreeNode* A, int B) {
+    unordered_set<int > set;
+    return findsum(A,B,set);
+}

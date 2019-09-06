@@ -1,0 +1,57 @@
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗
+B:     b1 → b2 → b3
+
+begin to intersect at node c1.
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+int getLen(ListNode* head){
+    ListNode* temp=head;
+    int cnt=0;
+    while(temp){
+        temp=temp->next;
+        cnt++;
+    }
+    return cnt;
+} 
+ListNode* getIntersectionPoint(int d,ListNode *root1,ListNode *root2){
+    ListNode* temp1=root1;
+    ListNode* temp2=root2;
+    for(int i=0;i<d;i++){
+        temp1=temp1->next;
+    }
+    while(temp1 && temp2){
+        if(temp1==temp2)
+            return temp1;
+        temp1=temp1->next;
+        temp2=temp2->next;
+    }
+}
+ListNode* Solution::getIntersectionNode(ListNode* A, ListNode* B) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    if(A==NULL || B==NULL) return NULL;
+    int c1=getLen(A);
+    int c2=getLen(B);
+    int d;
+    if(c1>c2){
+        d=c1-c2;
+        return getIntersectionPoint(d,A,B);   
+    }
+    else{
+        d=c2-c1;
+        return getIntersectionPoint(d,B,A);
+    }
+}

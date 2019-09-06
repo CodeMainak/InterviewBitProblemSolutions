@@ -1,0 +1,47 @@
+For example, given following linked lists :
+
+  5 -> 8 -> 20 
+  4 -> 11 -> 15
+
+The merged list should be :
+
+4 -> 5 -> 8 -> 11 -> 15 -> 20
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ListNode* Solution::mergeTwoLists(ListNode* A, ListNode* B) {
+   if(A==NULL) return B;
+   if(B==NULL) return A;
+   ListNode *sort,*newnode;
+   if(A && B){
+        if(A->val<B->val){
+            sort=A;
+            A=A->next;
+        }else{
+            sort=B;
+            B=B->next;
+        }  
+    }
+    newnode=sort;
+    while(A && B){
+        if(A->val<B->val){
+            sort->next=A;
+            sort=A;
+            A=A->next;
+        }else{
+            sort->next=B;
+            sort=B;
+            B=B->next;
+        }
+    }
+    if(A==NULL) sort->next=B;
+    if(B==NULL) sort->next=A;
+    return newnode;
+}

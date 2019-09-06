@@ -1,0 +1,33 @@
+Given a linked list, remove the nth node from the end of list and return its head.
+
+For example, Given linked list: 1->2->3->4->5, and n = 2. After removing the second node from the end, the linked list becomes 1->2->3->5.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
+ListNode* Solution::removeNthFromEnd(ListNode* A, int B) {
+    int count=0;
+    ListNode* cur=A;
+    while(cur!=NULL){
+        count++;
+        cur=cur->next;   
+    }
+    int i=0;
+    cur=A;
+    if(B>=count){
+        A=A->next;
+        return A;
+    }
+    while(i<count-B-1){
+        cur=cur->next;
+        i++;
+    }
+    cur->next=cur->next->next;
+    return A;
+}

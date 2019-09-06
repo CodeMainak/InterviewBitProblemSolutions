@@ -1,0 +1,87 @@
+Input 1:
+    A = "XIV"
+Output 1:
+    14
+
+Input 2:
+    A = "XX"
+Output 2:
+    20
+
+int Solution::romanToInt(string A) {
+    int ans=0;
+    while(A.length()>0)
+    {
+        if(A[0]=='M')
+        {
+            ans+=1000;
+            A=A.substr(1,A.length()-1);
+        }
+        else if(A[0]=='C' && A[1]=='M')
+        {
+            ans+=900;
+            A=A.substr(2,A.length()-2);
+        }
+        else if(A[0]=='D')
+        {
+            ans+=500;
+            A=A.substr(1,A.length()-1);   
+        }
+        else if(A[0]=='C' &&A[1]=='D')
+        {
+            ans+=400;
+            A=A.substr(2,A.length()-2);
+        }
+        else if(A[0]=='C')
+        {
+            ans+=100;
+            A=A.substr(1,A.length()-1);
+        }
+        else if(A[0]=='X' && A[1]=='C')
+        {
+            ans+=90;
+            A=A.substr(2,A.length()-2);
+        }
+        else if(A[0]=='L')
+        {
+            ans+=50;
+            A=A.substr(1,A.length()-1);
+        }
+        else if(A[0]=='X' && A[1]=='L')
+        {
+            ans+=40;
+            A=A.substr(2,A.length()-2);
+        }    
+        else if(A[0]=='X')
+        {
+            ans+=10;
+            A=A.substr(1,A.length()-1);
+        }
+        else if(A[0]=='I' && A[1]=='X')
+        {
+            ans+=9;
+            A=A.substr(2,A.length()-2);
+        }
+        else if(A[0]=='V')
+        {
+            ans+=5;
+            A=A.substr(1,A.length()-1);
+        } 
+        else if(A[0]=='I'&& A[1]=='V')
+        {
+            ans+=4;
+            A=A.substr(2,A.length()-2);
+        }
+        else if(A[0]=='I')
+        {
+            ans+=1;
+            A=A.substr(1,A.length()-1);
+        }    
+    }
+    return ans;
+}
+
+
+
+
+

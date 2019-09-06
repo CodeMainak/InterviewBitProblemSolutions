@@ -1,0 +1,34 @@
+Input 1:
+    A = ["abcdefgh", "aefghijk", "abcefgh"]
+Output 1:
+    "a"
+    Explanation 1:
+        Longest common prefix of all the strings is "a".
+
+Input 2:
+    A = ["abab", "ab", "abcd"];
+Output 2:
+    "ab"
+    Explanation 2:
+        Longest common prefix of all the strings is "ab".
+
+string Solution::longestCommonPrefix(vector<string> &A) {
+    string ans="";
+    string str=A[0];
+    int mini=A[0].length();
+    for(int i=1;i<A.size();i++)
+    {
+        if(mini>A[i].length()){
+            mini=A[i].length();
+            str=A[i];
+        }
+    }    
+    for(int i=0;i<str.size();i++){
+        for(int j=0;j<A.size();j++){
+            if(str[i]!=A[j][i])
+                return ans;
+        }
+        ans+=str[i];
+    }
+    return str;;
+}

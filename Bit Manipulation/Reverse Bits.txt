@@ -1,0 +1,45 @@
+Reverse bits of an 32 bit unsigned integer
+
+Example 1:
+
+x = 0,
+
+          00000000000000000000000000000000  
+=>        00000000000000000000000000000000
+
+return 0
+
+Example 2:
+
+x = 3,
+
+          00000000000000000000000000000011 
+=>        11000000000000000000000000000000
+
+return 3221225472
+
+Since java does not have unsigned int, use long
+
+/**
+ * @input A : Integer
+ * 
+ * @Output Integer
+ */
+unsigned int reverse(unsigned int A) {
+    int arr[32],i=0,temp,ans=0;
+    while(i<32){
+        if((A & (1<<i))==0)
+            arr[i]=0;
+        else
+            arr[i]=1;
+        i++;
+    }
+    i=31;
+    while(i>=0)
+    {
+        temp=1<<(31-i);
+        ans+=temp*arr[i];
+        i--;
+    }
+    return ans;
+}

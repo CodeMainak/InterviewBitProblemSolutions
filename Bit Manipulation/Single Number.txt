@@ -1,0 +1,17 @@
+Input : [1 2 2 3 1]
+Output : 3
+
+/**
+ * @input A : Read only ( DON'T MODIFY ) Integer array
+ * @input n1 : Integer array's ( A ) length
+ * 
+ * @Output Integer
+ */
+int singleNumber(const int* A, int n1) {
+    int i,num=A[i];
+    for(i=1;i<n1;i++)
+    {
+        num=num^A[i];
+    }
+    return num;
+}

@@ -1,0 +1,27 @@
+Input 1:
+    A = [1, 2, 3, 4, 5]
+Output 1:
+    7
+
+Input 2:
+    A = [5, 17, 100, 11]
+Output 2:
+    117
+
+public class Solution {
+    public int solve(int[] A) {
+        int maxXOR = 0, mask = 0;
+        for(int i = 31; i >= 0; i--) {
+            mask |= (1 << i);
+            int possibleMax = maxXOR | (1 << i);
+            Set<Integer> maskedNums = new HashSet<>();
+            for (int num : A) {
+                maskedNums.add(num & mask); 
+            }
+            for (int candidate : maskedNums) {
+                if (maskedNums.contains(possibleMax ^ candidate)) maxXOR = possibleMax;
+            }
+        }
+        return maxXOR;
+    }
+}

@@ -1,0 +1,49 @@
+Example :
+
+        _______3______
+       /              \
+    ___5__          ___1__
+   /      \        /      \
+   6      _2_     0        8
+         /   \
+         7    4
+
+For the above tree, the LCA of nodes 5 and 1 is 3. 
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+TreeNode* commonAncestor(TreeNode* root,int val1,int val2){
+    if(!root)
+        return NULL;
+    if(root->val==val1 || root->val==val2)
+        return root;
+    TreeNode* left=commonAncestor(root->left,val1,val2);
+    TreeNode* right=commonAncestor(root->right,val1,val2);
+    if(left && right )
+        return root;
+    return left?left:right;
+}
+bool find(TreeNode* root,int value){
+    if(!root)
+        return false;
+    if(root->val==value)
+        return true;
+    return find(root->left,value)||find(root->right,value); 
+}
+int Solution::lca(TreeNode* A, int B, int C) {
+    if(find(A,B)==false || find(A,C)==false)
+        return -1;
+    TreeNode* node=commonAncestor(A,B,C);
+    if(!node)
+        return -1;
+    return 
+        node->val;
+    
+}

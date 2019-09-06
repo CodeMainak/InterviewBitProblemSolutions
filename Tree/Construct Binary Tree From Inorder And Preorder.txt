@@ -1,0 +1,42 @@
+Input :
+        Preorder : [1, 2, 3]
+        Inorder  : [2, 1, 3]
+
+Return :
+            1
+           / \
+          2   3
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+TreeNode* constTree(vector<int> &A,vector<int> &B,int start,int end,int &p){
+    if(start>end)
+        return NULL;
+    TreeNode* node=new TreeNode(A[p++]);
+    if(start==end)
+        return node;
+    int index;
+    for(int i=start;i<=end;i++){
+        if(node->val==B[i]){
+            index=i;
+            break;
+        }
+    }
+    node->left=constTree(A,B,start,index-1,p);
+    node->right=constTree(A,B,index+1,end,p);
+    return node;
+}
+TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) {
+    if(A.size()==0 || B.size()==0)
+        return NULL;
+    int p=0;
+    return constTree(A,B,0,B.size()-1,p);
+}
+

@@ -1,0 +1,58 @@
+Given a binary tree, return a 2-D array with vertical order traversal of it. Go through the example and image for more details.
+
+Example : Given binary tree:
+
+      6
+    /   \
+   3     7
+  / \     \
+ 2   5     9
+
+returns
+
+[
+    [2],
+    [3],
+    [6 5],
+    [7],
+    [9]
+]
+
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+vector<vector<int> > Solution::verticalOrderTraversal(TreeNode* A) {
+    vector<vector<int>> v;
+    if(!A)
+        return v;
+    map<int,vector<int>> m;
+    queue<pair<TreeNode *,int>> q;
+    int h=0;
+    q.push(make_pair(A,h));
+    while(!q.empty()){
+        pair<TreeNode*,int> temp=q.front();
+        q.pop();
+        h=temp.second;
+        TreeNode* t=temp.first;
+        
+        m[h].push_back(t->val);
+        
+        if(t->left)
+            q.push(make_pair(t->left,h-1));
+        if(t->right)
+            q.push(make_pair(t->right,h+1));
+    }
+    map <int,vector<int>> :: iterator it;
+    int j=0;
+    for(it=m.begin();it!=m.end();it++){
+            v.push_back(it->second);
+    }
+    return v;
+}

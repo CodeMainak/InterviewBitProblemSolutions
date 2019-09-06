@@ -1,0 +1,52 @@
+Input 1:
+    A = 3
+
+Output 1:
+    [   [ 1, 2, 3 ],
+        [ 8, 9, 4 ],
+        [ 7, 6, 5 ]   ]
+
+Input 2:
+    4
+
+Output 2:
+    [   [1, 2, 3, 4],
+        [12, 13, 14, 5],
+        [11, 16, 15, 6],
+        [10, 9, 8, 7]   ]
+
+module.exports = { 
+ //param A : integer
+ //return a array of array of integers
+	generateMatrix : function(A){
+    var n=A,i,count=1;
+    var arr=[];
+    var left=0,top=0;
+    var right=n-1,bottom=n-1;
+    for(var i=0;i<n;i++){
+        arr[i]=new Array(n);
+    }while(1){
+    if(left>right)
+        btrak;
+    for(i=left;i<=right;i++)
+        arr[top][i]=count++;
+    top++;
+    if(top>bottom)
+        break;
+    for(i=top;i<=bottom;i++)
+        arr[i][right]=count++;
+    right--;
+    if(left>right)
+        btrak;
+    for(i=right;i>=left;i--)
+        arr[bottom][i]=count++;
+    bottom--;
+    if(top>bottom)
+        break;
+    for(i=bottom;i>=top;i--)
+        arr[i][left]=count++;
+    left++;
+    }
+    return arr;
+	}
+};

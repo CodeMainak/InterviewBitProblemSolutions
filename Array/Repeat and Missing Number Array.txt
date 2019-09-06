@@ -1,0 +1,35 @@
+You are given a read only array of n integers from 1 to n.
+
+Each integer appears exactly once except A which appears twice and B which is missing.
+
+Return A and B.
+
+Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Note that in your output A should precede B.
+
+Example:
+
+Input:[3 1 2 5 3] 
+
+Output:[3, 4] 
+
+A = 3, B = 4
+
+vector<int> Solution::repeatedNumber(const vector<int> &A) {
+    long long s=0,as=0,ass=0,ss=0,c1,c2,temp;
+    vector<int > a;
+    int n=A.size();
+    for(int i=0;i<n;i++){
+        as+=long(A[i]);
+        as-=(i+1);
+        ass+=((long)A[i]*(long)A[i]);
+        ass-=(long long)(i+1)*(long long)(i+1);
+    }
+    ass/=as;
+    int C=(int)((ass+as)/2);
+    int B=ass-C;
+    a.push_back(C);
+    a.push_back(B);
+    return a;
+}

@@ -1,0 +1,28 @@
+Input 1:
+    A = [1, 2, 3, 4, 5]
+    B = 5
+Output 1:
+    [2, 3]
+
+Input 2:
+    A = [5, 10, 20, 100, 105]
+    B = 110
+Output 2:
+    [-1]
+
+public class Solution {
+    public int[] solve(int[] A, int B) {
+        long sum = 0;
+        int l = 0;
+        for(int r = 0; r < A.length; r++) {
+            sum += A[r];
+            while(sum > B)  sum -= A[l++];
+            if(sum == B) {
+                int ans[] = new int[r-l+1];
+                for(int j = l; j <= r; j++) ans[j-l] = A[j];
+                return ans;
+            }
+        }
+        return new int[]{-1};
+    }
+}
